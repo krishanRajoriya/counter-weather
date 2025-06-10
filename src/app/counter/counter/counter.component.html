@@ -1,0 +1,9 @@
+<div class="counter-wrapper">
+    <h2>Counter App</h2>
+    <div class="counter-display">{{ count }}</div>
+    <div class="buttons">
+        <button class="btn" [disabled]="count === 0" (click)="decrement()">Decrement</button>
+        <button class="btn" (click)="increment()">Increment</button>
+    </div>
+</div>
+  

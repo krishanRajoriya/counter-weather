@@ -1,0 +1,41 @@
+<main class="weather-container">
+    <div class="weather-card">
+        <!-- Search Form -->
+        <form [formGroup]="weatherForm" (ngSubmit)="getWeatherByCity()" class="search-bar">
+            <input type="text" placeholder="Enter the city" formControlName="city" />
+            <button type="submit">Search</button>
+        </form>
+          
+
+        <!-- Weather Info -->
+        <div class="main-weather-info" *ngIf="weatherData as data">
+            <div class="left">
+                <h2>{{ city }} 
+                    <img *ngIf="weatherData && weatherData.weather && weatherData.weather.length > 0"
+                        [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png'" width="35" height="35"
+                        alt="{{ weatherData.weather[0].description }}" />
+                </h2>
+                <h1>{{ data.main.temp.toFixed(0) }}°</h1>
+                <p class="unit-toggle">
+                    <a href="#">°C</a> | <a href="#">°F</a>
+                </p>
+                <p>{{ currentDay }} {{ currentTime }}</p>
+            </div>
+            <div class="right">
+                <p>Precipitation: 1%</p>
+                <p>Humidity: {{ data.main.humidity }}%</p>
+                <p>Wind: {{ data.wind.speed }}km/h</p>
+            </div>
+        </div>
+
+        <!-- Forecast -->
+        <div class="forecast">
+            <div class="day" *ngFor="let day of forecast">
+                <p>{{ day.day }}</p>
+                <img [src]="day.icon" />
+                <p>{{ day.temp }}</p>
+            </div>
+        </div>
+    </div>
+</main>
+  
